@@ -7,9 +7,9 @@ type PostListItemProps = {
   post: Post;
 };
 type FooterButtonProps = {
-    text: string;
-    icon: React.ComponentProps<typeof FontAwesome>['name'];
-}
+  text: string;
+  icon: React.ComponentProps<typeof FontAwesome>['name'];
+};
 
 const FooterButton = ({ text, icon }: FooterButtonProps) => {
   return (
@@ -24,7 +24,7 @@ const FooterButton = ({ text, icon }: FooterButtonProps) => {
 
 const PostListItem = ({ post }: PostListItemProps) => {
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.header}>
         <Image source={{ uri: post.author.image }} style={styles.userImage} />
         <View>
@@ -47,6 +47,9 @@ const PostListItem = ({ post }: PostListItemProps) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+  },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -74,8 +77,8 @@ const styles = StyleSheet.create({
   footer: {
     flexDirection: 'row',
     paddingVertical: 10,
-      justifyContent: 'space-around',
-      borderTopWidth: 0.5,
+    justifyContent: 'space-around',
+    borderTopWidth: 0.5,
     borderColor: 'lightgray',
   },
 });
