@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
 import PostListItem from '../../components/PostListItem';
 import posts from '../../assets/data/posts.json'
-import { Text, View } from '../../components/Themed';
+import {View } from '../../components/Themed';
 
-const firstPost = posts[0];
+const firstPost = posts[1];
 
 export default function TabOneScreen() {
   return (
@@ -17,8 +17,6 @@ export default function TabOneScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   title: {
     fontSize: 20,
