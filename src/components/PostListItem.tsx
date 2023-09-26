@@ -24,37 +24,43 @@ const FooterButton = ({ text, icon }: FooterButtonProps) => {
 };
 
 const PostListItem = ({ post }: PostListItemProps) => {
-    return (
-        <Link href={`/posts/${post.id}`} asChild>
-    <Pressable style={styles.container}>
-      <View style={styles.header}>
-        <Image source={{ uri: post.author.image }} style={styles.userImage} />
-        <View>
-          <Text style={styles.userName}>{post.author.name}</Text>
-          <Text>{post.author.position}</Text>
-        </View>
-      </View>
-      <Text style={styles.content}>{post.content}</Text>
-      {post.image && (
-        <Image source={{ uri: post.image }} style={styles.postImage} />
-      )}
+  return (
+    <Link href={`/posts/${post.id}`} asChild>
+      <Pressable style={styles.container}>
+        <Link href={`/users/${post.author.id}`} asChild>
+          <Pressable style={styles.header}>
+            <Image
+              source={{ uri: post.author.image }}
+              style={styles.userImage}
+            />
+            <View>
+              <Text style={styles.userName}>{post.author.name}</Text>
+              <Text>{post.author.position}</Text>
+            </View>
+          </Pressable>
+        </Link>
 
-      <View style={styles.footer}>
-        <FooterButton text="Like" icon="thumbs-o-up" />
-        <FooterButton text="Comment" icon="comment-o" />
-        <FooterButton text="Share" icon="share" />
-      </View>
-    </Pressable></Link>
+        <Text style={styles.content}>{post.content}</Text>
+        {post.image && (
+          <Image source={{ uri: post.image }} style={styles.postImage} />
+        )}
+
+        <View style={styles.footer}>
+          <FooterButton text="Like" icon="thumbs-o-up" />
+          <FooterButton text="Comment" icon="comment-o" />
+          <FooterButton text="Share" icon="share" />
+        </View>
+      </Pressable>
+    </Link>
   );
 };
 
 const styles = StyleSheet.create({
-    
   container: {
-        backgroundColor: 'white',
-        width: '100%',
-        maxWidth: 500,
-      alignSelf: 'center'
+    backgroundColor: 'white',
+    width: '100%',
+    maxWidth: 500,
+    alignSelf: 'center',
   },
   header: {
     flexDirection: 'row',
