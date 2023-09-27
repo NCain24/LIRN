@@ -56,7 +56,7 @@ const UserProfile = () => {
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Experience</Text>
         {user.experience?.map((experience) => (
-          <ExperienceListItem experience={experience} />
+          <ExperienceListItem key={experience.id} experience={experience} />
         ))}
       </View>
     </ScrollView>
