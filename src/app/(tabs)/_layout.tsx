@@ -29,13 +29,13 @@ export default function TabLayout() {
           title: 'Home Feed',
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           headerRight: () => (
-            <Link href="/modal" asChild>
+            <Link href="/search" asChild>
               <Pressable>
                 {({ pressed }) => (
                   <FontAwesome
-                    name="info-circle"
+                    name="search"
                     size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
+                    color={'gray'}
                     style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
                   />
                 )}
@@ -55,7 +55,9 @@ export default function TabLayout() {
         name="new-post"
         options={{
           title: 'Post',
-          tabBarIcon: ({ color }) => <TabBarIcon name="plus-square" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="plus-square" color={color} />
+          ),
         }}
       />
       <Tabs.Screen
@@ -69,7 +71,9 @@ export default function TabLayout() {
         name="jobs"
         options={{
           title: 'Jobs',
-          tabBarIcon: ({ color }) => <TabBarIcon name="briefcase" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="briefcase" color={color} />
+          ),
         }}
       />
     </Tabs>
