@@ -1,5 +1,4 @@
 import { Text, View, StyleSheet, Image, Pressable } from 'react-native';
-import React from 'react';
 import { Post } from '../types';
 import { FontAwesome } from '@expo/vector-icons';
 import { Link } from 'expo-router';
@@ -24,18 +23,22 @@ const FooterButton = ({ text, icon }: FooterButtonProps) => {
 };
 
 const PostListItem = ({ post }: PostListItemProps) => {
+  if (!post) {
+    return null;
+  }
+  console.log(post);
   return (
     <Link href={`/posts/${post.id}`} asChild>
       <Pressable style={styles.container}>
-        <Link href={`/users/${post.author.id}`} asChild>
+        <Link href={`/users/${post.profile.id}`} asChild>
           <Pressable style={styles.header}>
             <Image
-              source={{ uri: post.author.image }}
+              source={{ uri: post.profile.image }}
               style={styles.userImage}
             />
             <View>
-              <Text style={styles.userName}>{post.author.name}</Text>
-              <Text>{post.author.position}</Text>
+              <Text style={styles.userName}>{post.profile.name}</Text>
+              <Text>{post.profile.position}</Text>
             </View>
           </Pressable>
         </Link>
