@@ -7,10 +7,10 @@ type ExperienceListItemProps = {
 const ExperienceListItem = ({ experience }: ExperienceListItemProps) => {
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{ uri: experience.companyImage }} />
+      <Image style={styles.image} source={{ uri: experience.companyimage }} />
       <View>
         <Text>{experience.title}</Text>
-        <Text>{experience.companyName}</Text>
+        <Text>{experience.companyname}</Text>
       </View>
     </View>
   );
