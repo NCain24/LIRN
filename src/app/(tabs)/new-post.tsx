@@ -5,30 +5,57 @@ import { useNavigation, useRouter } from 'expo-router';
 import { useLayoutEffect, useState } from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
+import { gql, useMutation } from '@apollo/client';
+
+const insertPost = gql`
+  mutation MyMutation($userid: ID, $image: String, $content: String!) {
+    insertPost(content: $content, image: $image, userid: $userid) {
+      content
+      id
+      image
+      userid
+    }
+  }
+`;
 
 export default function NewPostScreen() {
   const [content, setContent] = useState('');
   const [image, setImage] = useState<string | null>(null);
 
+  const [handleMutation, { loading, error, data }] = useMutation(insertPost);
+
   const navigation = useNavigation();
   const router = useRouter();
 
-  const onPost = () => {
+  const onPost = async () => {
     console.warn('Posting: ', content);
-    setContent('');
-    setImage(null);
-    router.push('/(tabs)/');
+    try {
+      await handleMutation({
+        variables: {
+          userid: 2,
+          content,
+        },
+      });
+
+      router.push('/(tabs)/');
+      setContent('');
+      setImage(null);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <Pressable onPress={onPost} style={styles.postButton}>
-          <Text style={styles.postButtonText}>Submit</Text>
+          <Text style={styles.postButtonText}>
+            {loading ? 'Submitting...' : 'Submit'}
+          </Text>
         </Pressable>
       ),
     });
-  }, [onPost]);
+  }, [onPost, loading]);
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library

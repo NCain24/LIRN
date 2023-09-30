@@ -30,8 +30,6 @@ export default function HomeFeedScreen() {
     return <Text> Something went wrong</Text>;
   }
 
-  console.log(data.postList);
-
   return (
     <FlatList
       data={data.postList}
