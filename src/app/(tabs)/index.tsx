@@ -5,8 +5,8 @@ import { gql, useQuery } from '@apollo/client';
 const postList = gql`
   query PostListQuery {
     postList {
-      id
       content
+      id
       image
       profile {
         id
@@ -20,7 +20,6 @@ const postList = gql`
 
 export default function HomeFeedScreen() {
   const { loading, error, data } = useQuery(postList);
-  console.log(data);
 
   if (loading) {
     return <ActivityIndicator />;
@@ -31,9 +30,11 @@ export default function HomeFeedScreen() {
     return <Text> Something went wrong</Text>;
   }
 
+  console.log(data.postList);
+
   return (
     <FlatList
-      data={[data.postList]}
+      data={data.postList}
       renderItem={({ item }) => <PostListItem post={item} />}
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{ gap: 10 }}

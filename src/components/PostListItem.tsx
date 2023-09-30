@@ -6,30 +6,28 @@ import { Link } from 'expo-router';
 type PostListItemProps = {
   post: Post;
 };
-type FooterButtonProps = {
+
+type FooterButtonProp = {
   text: string;
   icon: React.ComponentProps<typeof FontAwesome>['name'];
 };
 
-const FooterButton = ({ text, icon }: FooterButtonProps) => {
+function FooterButton({ text, icon }: FooterButtonProp) {
   return (
     <View style={{ flexDirection: 'row' }}>
-      <FontAwesome name={icon} size={16} color="black" />
+      <FontAwesome name={icon} size={16} color="gray" />
       <Text style={{ marginLeft: 5, color: 'gray', fontWeight: '500' }}>
         {text}
       </Text>
     </View>
   );
-};
+}
 
-const PostListItem = ({ post }: PostListItemProps) => {
-  if (!post) {
-    return null;
-  }
-  console.log(post);
+export default function PostListItem({ post }: PostListItemProps) {
   return (
     <Link href={`/posts/${post.id}`} asChild>
       <Pressable style={styles.container}>
+        {/* Header */}
         <Link href={`/users/${post.profile.id}`} asChild>
           <Pressable style={styles.header}>
             <Image
@@ -43,11 +41,15 @@ const PostListItem = ({ post }: PostListItemProps) => {
           </Pressable>
         </Link>
 
+        {/* Text content */}
         <Text style={styles.content}>{post.content}</Text>
+
+        {/* Image content */}
         {post.image && (
           <Image source={{ uri: post.image }} style={styles.postImage} />
         )}
 
+        {/* Footer */}
         <View style={styles.footer}>
           <FooterButton text="Like" icon="thumbs-o-up" />
           <FooterButton text="Comment" icon="comment-o" />
@@ -56,7 +58,7 @@ const PostListItem = ({ post }: PostListItemProps) => {
       </Pressable>
     </Link>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -65,6 +67,8 @@ const styles = StyleSheet.create({
     maxWidth: 500,
     alignSelf: 'center',
   },
+
+  // Header
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -81,6 +85,8 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     marginRight: 10,
   },
+
+  // Body
   content: {
     margin: 10,
     marginTop: 0,
@@ -89,6 +95,8 @@ const styles = StyleSheet.create({
     width: '100%',
     aspectRatio: 1,
   },
+
+  // footer
   footer: {
     flexDirection: 'row',
     paddingVertical: 10,
@@ -97,5 +105,3 @@ const styles = StyleSheet.create({
     borderColor: 'lightgray',
   },
 });
-
-export default PostListItem;
